@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: #08070D; }
+body { background: #08070D; color: #F5F3FF; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: rgba(168, 85, 247, 0.4); }
+:focus-visible { outline: 2px solid #C084FC; outline-offset: 3px; border-radius: 6px; }
+
+/* Skip rendering work for off-screen sections */
+main > section:not(#top) { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+
+@layer components {
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(168,85,247,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,85,247,0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 70%);
+  }
+  .hero-glow { background: radial-gradient(closest-side, rgba(168,85,247,0.28), rgba(124,58,237,0.1) 55%, transparent 100%); }
+  .text-gradient { @apply bg-gradient-to-r from-glow via-accent to-violet2 bg-clip-text text-transparent; }
+  .panel {
+    @apply relative rounded-2xl border border-line bg-gradient-to-b from-card to-deep;
+    box-shadow: inset 0 1px 0 rgba(192,132,252,0.12);
+  }
+  .lift { @apply transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_16px_44px_-20px_rgba(168,85,247,0.7)]; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .lift:hover { transform: none; }
+}
